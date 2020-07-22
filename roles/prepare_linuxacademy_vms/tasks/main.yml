@@ -1,0 +1,62 @@
+- name: Install common packages
+  yum:
+    name: "{{ common_packages }}"
+
+- name: Set authorized key taken from file
+  authorized_key:
+    user: cloud_user
+    state: present
+    key: "{{ lookup('file', '{{ pub_key_location }}') }}"
+
+- name: Allow specified groups to sudo
+  template: 
+    src: sudoers.j2
+    dest: /etc/sudoers.d/sudoers
+    validate: 'visudo -cf %s'
+    mode: 0440
+
+- name: Disable SSH root login
+  lineinfile:
+    dest: /etc/ssh/sshd_config 
+    regexp: "^PermitRootLogin" 
+    line: "PermitRootLogin no" 
+    state: present
+  notify:
+    - restart sshd
+
+- name: Disable SSH password authentication (1/2)
+  lineinfile: 
+    dest: /etc/ssh/sshd_config 
+    regexp: "^PasswordAuthentication" 
+    line: "PasswordAuthentication no"
+    state: present
+  notify:
+    - restart sshd
+
+- name: Disable SSH password authentication (2/2)
+  lineinfile: 
+    dest: /etc/ssh/sshd_config 
+    regexp: "^ChallengeResponseAuthentication" 
+    line: "ChallengeResponseAuthentication no"
+    state: present
+  notify:
+    - restart sshd
+
+- name: clone oh-my-zsh for cloud_user
+  # core.autocrlf=input prevents https://github.com/robbyrussell/oh-my-zsh/issues/4402
+  command: "git clone -c core.autocrlf=input --depth=1 https://github.com/robbyrussell/oh-my-zsh.git .oh-my-zsh"
+  args:
+    chdir: "~{{ username }}"
+    creates: "~{{ username }}/.oh-my-zsh"
+
+- name: set default shell for cloud_user
+  user:
+    name: "{{ username }}"
+    shell: /bin/zsh
+
+- name: write .zshrc for cloud_user
+  template:
+    src: zshrc.j2
+    dest: "~{{ username }}/.zshrc"
+    backup: yes
+    mode: "u=rw,go=r"

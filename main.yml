@@ -1,0 +1,8 @@
+---
+- name: Prepare linux academy VMs
+  hosts: all
+  gather_facts: false
+  become: yes
+
+  roles:
+    - prepare_linuxacademy_vms

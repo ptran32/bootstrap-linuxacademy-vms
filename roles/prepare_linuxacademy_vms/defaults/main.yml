@@ -1,0 +1,18 @@
+---
+
+username: cloud_user
+pub_key_location: ~/.ssh/id_rsa.pub
+common_packages:
+  - zsh
+  - vim
+  - git
+
+base_svr_groups:
+  - name: cloud_user
+    groupid: 1003
+    sudo: true
+
+oh_my_zsh_theme: robbyrussell
+oh_my_zsh_plugins: 
+  - git
+  - extract

@@ -1,0 +1,11 @@
+[primary_dns]
+yourserver321c.mylabserver.com 
+yourserver322c.mylabserver.com 
+yourserver323c.mylabserver.com 
+yourserver324c.mylabserver.com
+
+[secondary_dns]
+yourserver321d.mylabserver.com 
+yourserver322d.mylabserver.com 
+yourserver323d.mylabserver.com 
+yourserver324d.mylabserver.com
