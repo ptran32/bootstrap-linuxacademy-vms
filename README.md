@@ -22,6 +22,8 @@ You can find the default password for each server on server playground page.
 Sometimes after lunch a new server, DNS can take time to propagate. Sometimes primary will come first, sometimes second dns will come first.
 Replace 'yourserver' with your server names. You can found it on server playground page.
 
+Modify hosts file:
+
 [primary_dns]  
 yourserver321c.mylabserver.com  
 yourserver322c.mylabserver.com  
@@ -37,7 +39,6 @@ yourserver324d.mylabserver.com
 ### Modify default variables
 
 Ansible will use the default public key at this location: ~/.ssh/id_rsa.pub
-
 
 You can change the default location in roles/prepare_linuxacademy_vms/defaults/main.yml
 
