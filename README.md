@@ -17,13 +17,17 @@ You need to manually reset the default password provided by linuxacademy on each
 
 ### Modify inventory
 
-Replace 'yourserver' with the corresponding DNS. You can found them on cloud playground section.
+Modify hosts file by replacing 'yourserver' with the corresponding DNS. You can found them on cloud playground section.
 
+
+```
 [lac-servers]  
+
 yourserver321c.mylabserver.com  
 yourserver322c.mylabserver.com  
 yourserver323c.mylabserver.com  
 yourserver324c.mylabserver.com 
+```
 
 ### Modify default variables
 
