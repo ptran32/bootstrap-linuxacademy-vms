@@ -11,33 +11,23 @@ This repo initiate the first configuration for new linuxacademy servers and do t
 
 ### Reset default password on all servers
 
-You need to reset the default password on all servers. Use the same password for all servers.
-
-You can find the default password for each server on server playground page.
+You need to manually reset the default password provided by linuxacademy on each new server. Use the same password for all servers.
 
 ## Use your own configuration
 
 ### Modify inventory
 
-Sometimes after lunch a new server, DNS can take time to propagate. Sometimes primary will come first, sometimes second dns will come first.
-Replace 'yourserver' with your server names. You can found it on server playground page.
+Replace 'yourserver' with the corresponding DNS. You can found them on cloud playground section.
 
-[primary_dns]  
+[lac-servers]  
 yourserver321c.mylabserver.com  
 yourserver322c.mylabserver.com  
 yourserver323c.mylabserver.com  
 yourserver324c.mylabserver.com 
 
-[secondary_dns]  
-yourserver321d.mylabserver.com  
-yourserver322d.mylabserver.com  
-yourserver323d.mylabserver.com  
-yourserver324d.mylabserver.com
-
 ### Modify default variables
 
 Ansible will use the default public key at this location: ~/.ssh/id_rsa.pub
-
 
 You can change the default location in roles/prepare_linuxacademy_vms/defaults/main.yml
 
@@ -51,7 +41,7 @@ pub_key_location: /home/myuser/.ssh/id_rsa.pub
 
 Run the command below:
 
-Ansible will ask you for input for ssh password first, and the become pass in second.
+Ansible will ask you to put your ssh password first, then the become password.
 
 ```
 ansible -i hosts main.yml --ask-pass --ask-become-pass
