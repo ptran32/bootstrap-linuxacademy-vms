@@ -3,6 +3,7 @@
 This repo initiate the first configuration for new linuxacademy servers and do these actions below:
 
 - Remove SSH password connection
+- Add cloud_user as sudoers
 - Configure private/public key connection
 - Install descent linux packages
 - Install ohmyzsh as default shell
@@ -18,7 +19,6 @@ You need to manually reset the default password provided by linuxacademy on each
 ### Modify inventory
 
 Modify hosts file by replacing 'yourserver' with the corresponding DNS. You can found them on cloud playground section.
-
 
 ```
 [lac-servers]  
@@ -43,10 +43,12 @@ pub_key_location: /home/myuser/.ssh/id_rsa.pub
 
 ## Usage
 
-Run the command below:
+Run the command below to bootstrap new VM's:
 
 Ansible will ask you to put your ssh password first, then the become password.
 
 ```
 ansible -i hosts main.yml --ask-pass --ask-become-pass
 ```
+
+Future connections will now use cloud_user and your private/public key.
